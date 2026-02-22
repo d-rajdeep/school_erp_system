@@ -21,4 +21,14 @@ class Student extends Model
     {
         return $this->belongsTo(School::class, 'tenant_id');
     }
+
+    public function class()
+    {
+        return $this->belongsTo(Classes::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
+    }
 }

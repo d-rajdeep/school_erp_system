@@ -1,841 +1,617 @@
 @extends('super_admin.layouts.app')
-@section('content')
 
-    {{-- <div class="main-panel">
-        <div class="content-wrapper pb-0">
-            <div class="page-header flex-wrap">
-                <h3 class="mb-0">Hi, welcome back! <span class="ps-0 h6 ps-sm-2 text-muted d-inline-block">Your web
-                        analytics
-                        dashboard
-                        template.</span>
-                </h3>
-                <div class="d-flex">
-                    <button type="button" class="btn btn-sm bg-white btn-icon-text border">
-                        <i class="mdi mdi-email btn-icon-prepend"></i> Email </button>
-                    <button type="button" class="btn btn-sm bg-white btn-icon-text border ms-3">
-                        <i class="mdi mdi-printer btn-icon-prepend"></i> Print </button>
-                    <button type="button" class="btn btn-sm ms-3 btn-success"> Add User</button>
-                </div>
+@section('content')
+    <div class="container-fluid px-4">
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="fw-bold">Super Admin Dashboard</h1>
+                <p class="text-muted">Welcome back, {{ Auth::user()->name }}! Here's what's happening with your system.</p>
             </div>
-            <div class="row">
-                <div class="col-xl-3 col-lg-12 stretch-card grid-margin">
-                    <div class="row">
-                        <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                            <div class="card bg-warning">
-                                <div class="card-body px-3 py-4">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div class="color-card">
-                                            <p class="mb-0 color-card-head">Sales</p>
-                                            <h2 class="text-white">$8,753.<span class="h5">00</span></h2>
-                                        </div>
-                                        <i class="card-icon-indicator mdi mdi-basket bg-inverse-icon-warning"></i>
-                                    </div>
-                                    <h6 class="text-white">18.33% Since last month</h6>
-                                </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#quickActionsModal">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </button>
+                <button class="btn btn-primary" onclick="window.location.reload()">
+                    <i class="fas fa-sync-alt me-2"></i>Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row g-4 mb-4">
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-primary text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-white-50 mb-2">Total Schools</h6>
+                                <h2 class="mb-0">{{ $totalSchools ?? 245 }}</h2>
                             </div>
+                            <i class="fas fa-school fa-3x text-white-50"></i>
                         </div>
-                        <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3">
-                            <div class="card bg-danger">
-                                <div class="card-body px-3 py-4">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div class="color-card">
-                                            <p class="mb-0 color-card-head">Margin</p>
-                                            <h2 class="text-white">$5,300.<span class="h5">00</span></h2>
-                                        </div>
-                                        <i class="card-icon-indicator mdi mdi-cube-outline bg-inverse-icon-danger"></i>
-                                    </div>
-                                    <h6 class="text-white">13.21% Since last month</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-md-6 stretch-card grid-margin grid-margin-sm-0 pb-sm-3 pb-lg-0 pb-xl-3">
-                            <div class="card bg-primary">
-                                <div class="card-body px-3 py-4">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div class="color-card">
-                                            <p class="mb-0 color-card-head">Orders</p>
-                                            <h2 class="text-white">$1,753.<span class="h5">00</span></h2>
-                                        </div>
-                                        <i
-                                            class="card-icon-indicator mdi mdi-briefcase-outline bg-inverse-icon-primary"></i>
-                                    </div>
-                                    <h6 class="text-white">67.98% Since last month</h6>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-12 col-md-6 stretch-card pb-sm-3 pb-lg-0">
-                            <div class="card bg-success">
-                                <div class="card-body px-3 py-4">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div class="color-card">
-                                            <p class="mb-0 color-card-head">Affiliate</p>
-                                            <h2 class="text-white">2368</h2>
-                                        </div>
-                                        <i class="card-icon-indicator mdi mdi-account-circle bg-inverse-icon-success"></i>
-                                    </div>
-                                    <h6 class="text-white">20.32% Since last month</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-9 stretch-card grid-margin">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <h5>Business Survey</h5>
-                                    <p class="text-muted">Show overview jan 2018 - Dec 2019 <a
-                                            class="text-muted font-weight-medium ps-2" href="#"><u>See
-                                                Details</u></a></p>
-                                </div>
-                                <div class="col-sm-5 text-md-end">
-                                    <button type="button"
-                                        class="btn btn-icon-text mb-3 mb-sm-0 btn-inverse-primary font-weight-normal">
-                                        <i class="mdi mdi-email btn-icon-prepend"></i>Download Report</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="card mb-3 mb-sm-0">
-                                        <div class="card-body py-3 px-4">
-                                            <p class="m-0 survey-head">Today Earnings</p>
-                                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
-                                                <div>
-                                                    <h3 class="m-0 survey-value">$5,300</h3>
-                                                    <p class="text-success m-0">-310 avg. sales</p>
-                                                </div>
-                                                <div id="earningChart" class="flot-chart"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card mb-3 mb-sm-0">
-                                        <div class="card-body py-3 px-4">
-                                            <p class="m-0 survey-head">Product Sold</p>
-                                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
-                                                <div>
-                                                    <h3 class="m-0 survey-value">$9,100</h3>
-                                                    <p class="text-danger m-0">-310 avg. sales</p>
-                                                </div>
-                                                <div id="productChart" class="flot-chart"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="card">
-                                        <div class="card-body py-3 px-4">
-                                            <p class="m-0 survey-head">Today Orders</p>
-                                            <div class="d-flex justify-content-between align-items-end flot-bar-wrapper">
-                                                <div>
-                                                    <h3 class="m-0 survey-value">$4,354</h3>
-                                                    <p class="text-success m-0">-310 avg. sales</p>
-                                                </div>
-                                                <div id="orderChart" class="flot-chart"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row my-3">
-                                <div class="col-sm-12">
-                                    <div class="flot-chart-wrapper">
-                                        <div id="flotChart" class="flot-chart">
-                                            <canvas class="flot-base"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <p class="text-muted mb-0">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
-                                        <b>Learn More</b>
-                                    </p>
-                                </div>
-                                <div class="col-sm-4">
-                                    <p class="mb-0 text-muted">Sales Revenue</p>
-                                    <h5 class="d-inline-block survey-value mb-0">$2,45,500</h5>
-                                    <p class="d-inline-block text-danger mb-0">last 8 months</p>
-                                </div>
-                            </div>
+                        <div class="mt-3 small">
+                            <span class="text-white-50">+{{ $newSchoolsThisMonth ?? 12 }} this month</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-8 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body px-0 overflow-auto">
-                            <h4 class="card-title ps-4">Purchase History</h4>
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead class="bg-light">
-                                        <tr>
-                                            <th> Customer </th>
-                                            <th> Project </th>
-                                            <th> Invoice </th>
-                                            <th> Amount </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/images/faces/face1.jpg" alt="image" />
-                                                    <div class="table-user-name ms-3">
-                                                        <p class="mb-0 font-weight-medium">Cecelia Cooper</p>
-                                                        <small> Payment on hold</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> Angular Admin</td>
-                                            <td>
-                                                <div class="badge badge-inverse-success"> Completed </div>
-                                            </td>
-                                            <td> $ 77.99 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/images/faces/face10.jpg" alt="image" />
-                                                    <div class="table-user-name ms-3">
-                                                        <p class="mb-0 font-weight-medium">Victor Watkins</p>
-                                                        <small>Email verified</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> Angular Admin </td>
-                                            <td>
-                                                <div class="badge badge-inverse-success"> Completed </div>
-                                            </td>
-                                            <td> $245.30 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/images/faces/face11.jpg" alt="image" />
-                                                    <div class="table-user-name ms-3">
-                                                        <p class="mb-0 font-weight-medium">Ada Burgess</p>
-                                                        <small>Email verified</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> One page html </td>
-                                            <td>
-                                                <div class="badge badge-inverse-danger"> Completed </div>
-                                            </td>
-                                            <td> $ 160.25 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/images/faces/face13.jpg" alt="image" />
-                                                    <div class="table-user-name ms-3">
-                                                        <p class="mb-0 font-weight-medium">Dollie Lynch</p>
-                                                        <small>Email verified</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> Wordpress </td>
-                                            <td>
-                                                <div class="badge badge-inverse-success "> Declined </div>
-                                            </td>
-                                            <td> $ 123.21 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <img src="assets/images/faces/face16.jpg" alt="image" />
-                                                    <div class="table-user-name ms-3">
-                                                        <p class="mb-0 font-weight-medium">Harry Holloway</p>
-                                                        <small>Payment on process</small>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td> VueJs Application </td>
-                                            <td>
-                                                <div class="badge badge-inverse-danger"> Declined </div>
-                                            </td>
-                                            <td> $ 150.00 </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-white-50 mb-2">Total Users</h6>
+                                <h2 class="mb-0">{{ $totalUsers ?? 15230 }}</h2>
                             </div>
-                            <a class="text-black mt-3 d-block ps-4" href="#"> <span
-                                    class="font-weight-medium h6">View
-                                    all order history</span> <i class="mdi mdi-chevron-right"></i></a>
+                            <i class="fas fa-users fa-3x text-white-50"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card-title font-weight-medium">Business Survey</div>
-                            <p class="text-muted">Lorem ipsum dolor sitadipiscing elit, sed amet do eiusmod
-                                tempor we find a new solution </p>
-                            <div class="d-flex flex-wrap border-bottom py-2 border-top justify-content-between">
-                                <img class="survey-img mb-lg-3" src="assets/images/dashboard/img_3.jpg" alt="">
-                                <div class="pt-2">
-                                    <h5 class="mb-0">Villa called Archagel</h5>
-                                    <p class="mb-0 text-muted">St, San Diego, CA </p>
-                                    <h5 class="mb-0">$600/mo</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-wrap border-bottom py-2 justify-content-between">
-                                <img class="survey-img mb-lg-3" src="assets/images/dashboard/img_1.jpg" alt="">
-                                <div class="pt-2">
-                                    <h5 class="mb-0">Luxury villa in Hermo</h5>
-                                    <p class="mb-0 text-muted">Glendale, CA </p>
-                                    <h5 class="mb-0">$900/mo</h5>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-wrap border-bottom py-2 justify-content-between">
-                                <img class="survey-img mb-lg-3" src="assets/images/dashboard/img_2.jpg" alt="">
-                                <div class="pt-2">
-                                    <h5 class="mb-0">House on the Clarita</h5>
-                                    <p class="mb-0 text-muted">Business Survey </p>
-                                    <h5 class="mb-0">$459/mo</h5>
-                                </div>
-                            </div>
-                            <a class="text-black mt-3 d-block font-weight-medium h6" href="#">View all
-                                <i class="mdi mdi-chevron-right"></i></a>
+                        <div class="mt-3 small">
+                            <span class="text-white-50">{{ $activeUsers ?? 12500 }} active users</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title text-black">To do Task List</h4>
-                            <p class="text-muted">Created by anonymous</p>
-                            <div class="list-wrapper">
-                                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Meeting with Alisa
-                                            </label>
-                                            <span class="list-time">4 Hours Ago</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Create invoice
-                                            </label>
-                                            <span class="list-time">6 Hours Ago</span>
-                                        </div>
-                                    </li>
-                                    <li class="completed">
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox" checked> Prepare for
-                                                presentation </label>
-                                            <span class="list-time">2 Hours Ago</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="form-check">
-                                            <label class="form-check-label">
-                                                <input class="checkbox" type="checkbox"> Pick up kids from
-                                                school </label>
-                                            <span class="list-time">8 Hours Ago</span>
-                                        </div>
-                                    </li>
-                                </ul>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-info text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-white-50 mb-2">Active Modules</h6>
+                                <h2 class="mb-0">{{ $activeModules ?? 24 }}</h2>
                             </div>
-                            <div class="add-items d-flex flex-wrap flex-sm-nowrap">
-                                <input type="text" class="form-control todo-list-input flex-grow"
-                                    placeholder="Add task name">
-                                <button class="add btn btn-primary font-weight-regular  text-nowrap" id="add-task">Add
-                                    Task</button>
-                            </div>
+                            <i class="fas fa-puzzle-piece fa-3x text-white-50"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title text-black">Recent Customers</h4>
-                            <p class="text-muted">All contacts</p>
-                            <div class="row pt-2 pb-1">
-                                <div class="col-12 col-sm-7">
-                                    <div class="row">
-                                        <div class="col-4 col-md-4">
-                                            <img class="customer-img" src="assets/images/faces/face22.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="col-8 col-md-8 p-sm-0">
-                                            <h6 class="mb-0">Cecelia Cooper</h6>
-                                            <p class="text-muted font-12">05:58AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class=" col-sm-5 ps-0">
-                                    <canvas id="areaChart1"></canvas>
-                                </div>
-                            </div>
-                            <div class="row py-1">
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="col-4 col-sm-4">
-                                            <img class="customer-img" src="assets/images/faces/face25.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="col-8 col-sm-8 p-sm-0">
-                                            <h6 class="mb-0">Victor Watkins</h6>
-                                            <p class="text-muted font-12">05:28AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 ps-0">
-                                    <canvas id="areaChart2"></canvas>
-                                </div>
-                            </div>
-                            <div class="row py-1">
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="col-4 col-sm-4">
-                                            <img class="customer-img" src="assets/images/faces/face15.jpg"
-                                                alt="">
-                                        </div>
-                                        <div class="col-8 col-sm-8 p-sm-0">
-                                            <h6 class="mb-0">Ada Burgess</h6>
-                                            <p class="text-muted font-12">05:57AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 ps-0">
-                                    <canvas id="areaChart3"></canvas>
-                                </div>
-                            </div>
-                            <div class="row py-1">
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="col-4 col-sm-4">
-                                            <img class="customer-img" src="assets/images/faces/face5.jpg" alt="">
-                                        </div>
-                                        <div class="col-8 col-sm-8 p-sm-0">
-                                            <h6 class="mb-0">Dollie Lynch</h6>
-                                            <p class="text-muted font-12">05:59AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 ps-0">
-                                    <canvas id="areaChart4"></canvas>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-7">
-                                    <div class="row">
-                                        <div class="col-4 col-sm-4">
-                                            <img class="customer-img" src="assets/images/faces/face2.jpg" alt="">
-                                        </div>
-                                        <div class="col-8 col-sm-8 p-sm-0">
-                                            <h6 class="mb-0">Harry Holloway</h6>
-                                            <p class="text-muted font-12 mb-0">05:13AM</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-5 ps-0">
-                                    <canvas id="areaChart5" height="100"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title text-black">Business Survey</h4>
-                            <p class="text-muted pb-2">Jan 01 2019 - Dec 31 2019</p>
-                            <canvas id="surveyBar"></canvas>
-                            <div class="row border-bottom pb-3 pt-4 align-items-center mx-0">
-                                <div class="col-sm-9 ps-0">
-                                    <div class="d-flex">
-                                        <img src="assets/images/dashboard/img_4.jpg" alt="">
-                                        <div class="ps-2">
-                                            <h6 class="m-0">Red Chair</h6>
-                                            <p class="m-0">Home Decoration</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 ps-0 pl-sm-3">
-                                    <div class="badge badge-inverse-success mt-3 mt-sm-0"> +7.7%</div>
-                                </div>
-                            </div>
-                            <div class="row py-3 align-items-center mx-0">
-                                <div class="col-sm-9 ps-0">
-                                    <div class="d-flex">
-                                        <img src="assets/images/dashboard/img_5.jpg" alt="">
-                                        <div class="ps-2">
-                                            <h6 class="m-0">Gray Sofa</h6>
-                                            <p class="m-0">Home Decoration</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 ps-0 pl-sm-3">
-                                    <div class="badge badge-inverse-success mt-3 mt-sm-0"> +7.7%</div>
-                                </div>
-                            </div>
+                        <div class="mt-3 small">
+                            <span class="text-white-50">{{ $totalModules ?? 32 }} total modules</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-8 grid-margin stretch-card">
-                    <div class="card card-calender">
-                        <div class="card-body">
-                            <div class="row pt-4">
-                                <div class="col-sm-6">
-                                    <h1 class="text-white">10:16PM</h1>
-                                    <h5 class="text-white">Monday 25 October, 2016</h5>
-                                    <h5 class="text-white pt-2 m-0">Precipitation:50%</h5>
-                                    <h5 class="text-white m-0">Humidity:23%</h5>
-                                    <h5 class="text-white m-0">Wind:13 km/h</h5>
-                                </div>
-                                <div class="col-sm-6 text-sm-right pt-3 pt-sm-0">
-                                    <h3 class="text-white">Clear Sky</h3>
-                                    <p class="text-white m-0"> London, UK</p>
-                                    <h3 class="text-white m-0">21°C</h3>
-                                </div>
+            <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white h-100">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-white-50 mb-2">Revenue (Monthly)</h6>
+                                <h2 class="mb-0">${{ number_format($monthlyRevenue ?? 45250) }}</h2>
                             </div>
-                            <div class="row mt-5">
-                                <div class="col-sm-12">
-                                    <ul class="d-flex ps-0 overflow-auto">
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center active">
-                                            <p class="mb-0"> TODAY </p>
-                                            <i class="mdi mdi-weather-cloudy"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> MON </p>
-                                            <i class="mdi mdi-weather-hail"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> TUE </p>
-                                            <i class="mdi mdi-weather-cloudy"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> WED </p>
-                                            <i class="mdi mdi-weather-fog"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> THU </p>
-                                            <i class="mdi mdi-weather-hail"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> FRI </p>
-                                            <i class="mdi mdi-weather-cloudy"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> SAT </p>
-                                            <i class="mdi mdi-weather-hail"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                        <li class="weakly-weather-item text-white font-weight-medium text-center">
-                                            <p class="mb-0"> SUN </p>
-                                            <i class="mdi mdi-weather-cloudy"></i>
-                                            <p class="mb-0"> 21<span class="symbol">°c</span>
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <i class="fas fa-dollar-sign fa-3x text-white-50"></i>
+                        </div>
+                        <div class="mt-3 small">
+                            <span class="text-white-50">↑ {{ $revenueGrowth ?? 8.5 }}% from last month</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 grid-margin stretch-card">
-                    <!--activity-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <span class="d-flex justify-content-between">
-                                    <span>Activity</span>
-                                    <span class="dropdown dropleft d-block">
-                                        <span id="dropdownMenuButton1" data-bs-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <span><i class="mdi mdi-dots-horizontal"></i></span>
-                                        </span>
-                                        <span class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                            <a class="dropdown-item" href="#">Contact</a>
-                                            <a class="dropdown-item" href="#">Helpdesk</a>
-                                            <a class="dropdown-item" href="#">Chat with us</a>
-                                        </span>
-                                    </span>
-                                </span>
-                            </h4>
-                            <ul class="gradient-bullet-list border-bottom">
-                                <li>
-                                    <h6 class="mb-0">It's awesome when we find a new solution </h6>
-                                    <p class="text-muted"> 2h ago </p>
-                                </li>
-                                <li>
-                                    <h6 class="mb-0">Report has been updated</h6>
-                                    <p class="text-muted">
-                                        <span>2h ago</span>
-                                        <span class=" d-inline-block">
-                                            <span class="d-flex d-inline-block">
-                                                <img class="ms-1" src="assets/images/faces/face1.jpg" alt="">
-                                                <img class="ms-1" src="assets/images/faces/face10.jpg" alt="">
-                                                <img class="ms-1" src="assets/images/faces/face14.jpg" alt="">
-                                            </span>
-                                        </span>
-                                    </p>
-                                </li>
-                                <li>
-                                    <h6 class="mb-0">Analytics dashboard has been created#Slack</h6>
-                                    <p class="text-muted"> 2h ago </p>
-                                </li>
-                                <li>
-                                    <h6 class="mb-0">It's awesome when we find a new solution </h6>
-                                    <p class="text-muted"> 2h ago </p>
-                                </li>
-                            </ul>
-                            <a class="text-black mt-3 mb-0 d-block h6" href="#">View all <i
-                                    class="mdi mdi-chevron-right"></i></a>
-                        </div>
-                    </div>
-                    <!--activity ends-->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                    <div class="card card-invoice">
-                        <div class="card-body">
-                            <h4 class="card-title pb-3">Pending invoices</h4>
-                            <div class="list-card">
-                                <div class="row align-items-center">
-                                    <div class="col-7 col-sm-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-sm-4">
-                                                <img src="assets/images/faces/face2.jpg" alt="">
-                                            </div>
-                                            <div class="col-sm-8 pe-0 pl-sm-0">
-                                                <span>06 Jan 2019</span>
-                                                <h6 class="mb-1 mb-sm-0">Isabel Cross</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        <div class="d-flex pt-1 align-items-center">
-                                            <div class="reload-outer bg-info">
-                                                <i class="mdi mdi-reload"></i>
-                                            </div>
-                                            <div class="dropdown dropleft ps-1 pt-3">
-                                                <div id="dropdownMenuButton2" data-bs-toggle="dropdown" role="button"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <p><i class="mdi mdi-dots-vertical"></i></p>
-                                                </div>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                                    <a class="dropdown-item" href="#">Sales</a>
-                                                    <a class="dropdown-item" href="#">Track Invoice</a>
-                                                    <a class="dropdown-item" href="#">Payment
-                                                        History</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-card">
-                                <div class="row align-items-center">
-                                    <div class="col-7 col-sm-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-sm-4">
-                                                <img src="assets/images/faces/face3.jpg" alt="">
-                                            </div>
-                                            <div class="col-sm-8 pe-0 pl-sm-0">
-                                                <span>18 Mar 2019</span>
-                                                <h6 class="mb-1 mb-sm-0">Carrie Parker</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        <div class="d-flex pt-1 align-items-center">
-                                            <div class="reload-outer bg-primary">
-                                                <i class="mdi mdi-reload"></i>
-                                            </div>
-                                            <div class="dropdown dropleft ps-1 pt-3">
-                                                <div id="dropdownMenuButton3" data-bs-toggle="dropdown" role="button"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <p><i class="mdi mdi-dots-vertical"></i></p>
-                                                </div>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                                                    <a class="dropdown-item" href="#">Sales</a>
-                                                    <a class="dropdown-item" href="#">Track Invoice</a>
-                                                    <a class="dropdown-item" href="#">Payment
-                                                        History</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-card">
-                                <div class="row align-items-center">
-                                    <div class="col-7 col-sm-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-sm-4">
-                                                <img src="assets/images/faces/face11.jpg" alt="">
-                                            </div>
-                                            <div class="col-sm-8 pe-0 pl-sm-0">
-                                                <span>10 Apr 2019</span>
-                                                <h6 class="mb-1 mb-sm-0">Don Bennett</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        <div class="d-flex pt-1 align-items-center">
-                                            <div class="reload-outer bg-warning">
-                                                <i class="mdi mdi-reload"></i>
-                                            </div>
-                                            <div class="dropdown dropleft ps-1 pt-3">
-                                                <div id="dropdownMenuButton4" data-bs-toggle="dropdown" role="button"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <p><i class="mdi mdi-dots-vertical"></i></p>
-                                                </div>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                                                    <a class="dropdown-item" href="#">Sales</a>
-                                                    <a class="dropdown-item" href="#">Track Invoice</a>
-                                                    <a class="dropdown-item" href="#">Payment
-                                                        History</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-card">
-                                <div class="row align-items-center">
-                                    <div class="col-7 col-sm-8">
-                                        <div class="row align-items-center">
-                                            <div class="col-sm-4">
-                                                <img src="assets/images/faces/face3.jpg" alt="">
-                                            </div>
-                                            <div class="col-sm-8 pe-0 pl-sm-0">
-                                                <span>18 Mar 2019</span>
-                                                <h6 class="mb-1 mb-sm-0">Carrie Parker</h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-5 col-sm-4">
-                                        <div class="d-flex pt-1 align-items-center">
-                                            <div class="reload-outer bg-info">
-                                                <i class="mdi mdi-reload"></i>
-                                            </div>
-                                            <div class="dropdown dropleft ps-1 pt-3">
-                                                <div id="dropdownMenuButton5" data-bs-toggle="dropdown" role="button"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                    <p><i class="mdi mdi-dots-vertical"></i></p>
-                                                </div>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
-                                                    <a class="dropdown-item" href="#">Sales</a>
-                                                    <a class="dropdown-item" href="#">Track Invoice</a>
-                                                    <a class="dropdown-item" href="#">Payment
-                                                        History</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-md-6 grid-margin stretch-card">
-                    <!--datepicker-->
-                    <div class="card">
-                        <div class="card-body">
-                            <div id="inline-datepicker" class="datepicker"></div>
-                        </div>
-                    </div>
-                    <!--datepicker ends-->
-                </div>
-                <div class="col-xl-4 col-md-6 stretch-card grid-margin stretch-card">
-                    <!--browser stats-->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Browser stats</h4>
-                            <div class="row py-2">
-                                <div class="col-sm-12">
-                                    <div class="d-flex justify-content-between pb-3 border-bottom">
-                                        <div>
-                                            <img class="me-2" src="assets/images/browser-logo/opera-logo.png"
-                                                alt=""> <span class="p">opera mini</span>
-                                        </div>
-                                        <p class="mb-0">23%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-sm-12">
-                                    <div class="d-flex justify-content-between pb-3 border-bottom">
-                                        <div>
-                                            <img class="me-2" src="assets/images/browser-logo/safari-logo.png"
-                                                alt=""> <span class="p">Safari</span>
-                                        </div>
-                                        <p class="mb-0">07%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-sm-12">
-                                    <div class="d-flex justify-content-between pb-3 border-bottom">
-                                        <div>
-                                            <img class="me-2" src="assets/images/browser-logo/chrome-logo.png"
-                                                alt=""> <span class="p">Chrome</span>
-                                        </div>
-                                        <p class="mb-0">33%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-sm-12">
-                                    <div class="d-flex justify-content-between pb-3 border-bottom">
-                                        <div>
-                                            <img class="me-2" src="assets/images/browser-logo/firefox-logo.png"
-                                                alt=""> <span class="p">Firefox</span>
-                                        </div>
-                                        <p class="mb-0">17%</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-sm-12">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <img class="me-2" src="assets/images/browser-logo/explorer-logo.png"
-                                                alt=""> <span class="p">Explorer</span>
-                                        </div>
-                                        <p class="mb-0">05%</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--browser stats ends-->
                 </div>
             </div>
         </div>
-    </div> --}}
-    <h1>Super Admin Dashboard</h1>
 
-    <a href="/schools">Manage Schools</a>
+        <!-- Charts Row -->
+        <div class="row g-4 mb-4">
+            <div class="col-xl-8">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0 fw-bold">System Growth Overview</h5>
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-sm btn-outline-primary active">Weekly</button>
+                                <button class="btn btn-sm btn-outline-primary">Monthly</button>
+                                <button class="btn btn-sm btn-outline-primary">Yearly</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="growthChart" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 fw-bold">School Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="schoolDistributionChart" height="250"></canvas>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-circle text-primary me-2"></i>Active Schools</span>
+                                <span class="fw-bold">{{ $activeSchools ?? 210 }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <span><i class="fas fa-circle text-warning me-2"></i>Pending Schools</span>
+                                <span class="fw-bold">{{ $pendingSchools ?? 25 }}</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span><i class="fas fa-circle text-danger me-2"></i>Suspended Schools</span>
+                                <span class="fw-bold">{{ $suspendedSchools ?? 10 }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Cards Row 1 -->
+        <div class="row g-4 mb-4">
+            <!-- Schools Management -->
+            <div class="col-xl-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-school text-primary me-2"></i>Schools Management
+                        </h5>
+                        <span class="badge bg-primary">Core Feature</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <a href="{{ route('super_admin.schools.index') }}" class="text-decoration-none">
+                                    <div class="p-3 border rounded-3 hover-shadow">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="bg-primary bg-opacity-10 p-2 rounded-3 me-3">
+                                                <i class="fas fa-eye text-primary"></i>
+                                            </div>
+                                            <h6 class="mb-0 fw-semibold">View Schools</h6>
+                                        </div>
+                                        <p class="text-muted small mb-0">Browse and manage all schools</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ route('super_admin.schools.create') }}" class="text-decoration-none">
+                                    <div class="p-3 border rounded-3 hover-shadow">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="bg-success bg-opacity-10 p-2 rounded-3 me-3">
+                                                <i class="fas fa-plus-circle text-success"></i>
+                                            </div>
+                                            <h6 class="mb-0 fw-semibold">Add School</h6>
+                                        </div>
+                                        <p class="text-muted small mb-0">Create new school with admin</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 hover-shadow cursor-pointer" data-bs-toggle="modal"
+                                    data-bs-target="#editSchoolModal">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-warning bg-opacity-10 p-2 rounded-3 me-3">
+                                            <i class="fas fa-edit text-warning"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-semibold">Edit School</h6>
+                                    </div>
+                                    <p class="text-muted small mb-0">Modify school details</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 hover-shadow cursor-pointer" data-bs-toggle="modal"
+                                    data-bs-target="#manageSchoolModal">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-danger bg-opacity-10 p-2 rounded-3 me-3">
+                                            <i class="fas fa-ban text-danger"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-semibold">Disable/Delete</h6>
+                                    </div>
+                                    <p class="text-muted small mb-0">Manage school status</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 p-3 bg-light rounded-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="small text-muted">Recently added: 3 schools this week</span>
+                                <a href="{{ route('super_admin.schools.index') }}" class="small">View All <i
+                                        class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Module Management -->
+            <div class="col-xl-6">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-puzzle-piece text-info me-2"></i>Module Management
+                        </h5>
+                        <span class="badge bg-info">System Feature</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 hover-shadow cursor-pointer" data-bs-toggle="modal"
+                                    data-bs-target="#enableModulesModal">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-success bg-opacity-10 p-2 rounded-3 me-3">
+                                            <i class="fas fa-check-circle text-success"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-semibold">Enable Modules</h6>
+                                    </div>
+                                    <p class="text-muted small mb-0">Activate system modules</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 border rounded-3 hover-shadow cursor-pointer" data-bs-toggle="modal"
+                                    data-bs-target="#disableModulesModal">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="bg-danger bg-opacity-10 p-2 rounded-3 me-3">
+                                            <i class="fas fa-times-circle text-danger"></i>
+                                        </div>
+                                        <h6 class="mb-0 fw-semibold">Disable Modules</h6>
+                                    </div>
+                                    <p class="text-muted small mb-0">Deactivate system modules</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h6 class="fw-semibold mb-3">Popular Modules</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-light text-dark p-2">Student Management <i
+                                        class="fas fa-check-circle text-success ms-1"></i></span>
+                                <span class="badge bg-light text-dark p-2">Teacher Portal <i
+                                        class="fas fa-check-circle text-success ms-1"></i></span>
+                                <span class="badge bg-light text-dark p-2">Fee Management <i
+                                        class="fas fa-check-circle text-success ms-1"></i></span>
+                                <span class="badge bg-light text-dark p-2">Exam System <i
+                                        class="fas fa-times-circle text-danger ms-1"></i></span>
+                                <span class="badge bg-light text-dark p-2">Library <i
+                                        class="fas fa-times-circle text-danger ms-1"></i></span>
+                                <span class="badge bg-light text-dark p-2">Transport <i
+                                        class="fas fa-check-circle text-success ms-1"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Cards Row 2 -->
+        <div class="row g-4 mb-4">
+            <!-- CMS Management -->
+            <div class="col-xl-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-file-alt text-warning me-2"></i>CMS Management
+                        </h5>
+                        <span class="badge bg-warning">Content</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-file me-2 text-primary"></i>
+                                    <span>Page Builder</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#pageBuilderModal">
+                                    Manage <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-bars me-2 text-success"></i>
+                                    <span>Menu Builder</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal"
+                                    data-bs-target="#menuBuilderModal">
+                                    Manage <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-paint-brush me-2 text-info"></i>
+                                    <span>Theme Manager</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+                                    data-bs-target="#themeManagerModal">
+                                    Manage <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-cubes me-2 text-warning"></i>
+                                    <span>Content Blocks</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal"
+                                    data-bs-target="#contentBlocksModal">
+                                    Manage <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management -->
+            <div class="col-xl-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-users text-success me-2"></i>User Management
+                        </h5>
+                        <span class="badge bg-success">Security</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-user me-2 text-primary"></i>
+                                    <span>View Users</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#viewUsersModal">
+                                    View All <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-user-tag me-2 text-info"></i>
+                                    <span>Assign Roles</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal"
+                                    data-bs-target="#assignRolesModal">
+                                    Assign <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h6 class="fw-semibold mb-3">User Statistics</h6>
+                            <div class="progress-stacked">
+                                <div class="progress" role="progressbar" style="height: 8px;">
+                                    <div class="progress-bar bg-primary" style="width: 60%"></div>
+                                    <div class="progress-bar bg-info" style="width: 25%"></div>
+                                    <div class="progress-bar bg-warning" style="width: 15%"></div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between mt-2 small">
+                                <span><i class="fas fa-circle text-primary me-1"></i>School Admins (60%)</span>
+                                <span><i class="fas fa-circle text-info me-1"></i>Teachers (25%)</span>
+                                <span><i class="fas fa-circle text-warning me-1"></i>Others (15%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports & Analytics -->
+            <div class="col-xl-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 fw-bold">
+                            <i class="fas fa-chart-line text-danger me-2"></i>Reports & Analytics
+                        </h5>
+                        <span class="badge bg-danger">Insights</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush mb-3">
+                            <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fas fa-chart-pie me-2 text-primary"></i>
+                                    <span>System Analytics</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                    data-bs-target="#analyticsModal">
+                                    View <i class="fas fa-arrow-right ms-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row g-2 text-center">
+                            <div class="col-6">
+                                <div class="p-3 bg-light rounded-3">
+                                    <h5 class="mb-1 fw-bold">85%</h5>
+                                    <small class="text-muted">System Uptime</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-3 bg-light rounded-3">
+                                    <h5 class="mb-1 fw-bold">4.8/5</h5>
+                                    <small class="text-muted">User Rating</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row g-4">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 fw-bold">Recent System Activity</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>User</th>
+                                        <th>School</th>
+                                        <th>Time</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fas fa-plus-circle text-success me-2"></i>New School Created</td>
+                                        <td>John Doe</td>
+                                        <td>Springfield Elementary</td>
+                                        <td>5 minutes ago</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-edit text-warning me-2"></i>School Updated</td>
+                                        <td>Jane Smith</td>
+                                        <td>Riverside High</td>
+                                        <td>15 minutes ago</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-user-plus text-info me-2"></i>New Admin Assigned</td>
+                                        <td>Mike Johnson</td>
+                                        <td>Lincoln Academy</td>
+                                        <td>1 hour ago</td>
+                                        <td><span class="badge bg-success">Completed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fas fa-ban text-danger me-2"></i>Module Disabled</td>
+                                        <td>Sarah Wilson</td>
+                                        <td>System Wide</td>
+                                        <td>2 hours ago</td>
+                                        <td><span class="badge bg-warning">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Modal -->
+    <div class="modal fade" id="quickActionsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quick Actions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <a href="{{ route('super_admin.schools.create') }}"
+                            class="list-group-item list-group-item-action">
+                            <i class="fas fa-plus-circle text-primary me-2"></i>Add New School
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="modal"
+                            data-bs-toggle="modal" data-bs-target="#enableModulesModal">
+                            <i class="fas fa-puzzle-piece text-success me-2"></i>Enable Module
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="modal"
+                            data-bs-toggle="modal" data-bs-target="#viewUsersModal">
+                            <i class="fas fa-users text-info me-2"></i>Manage Users
+                        </a>
+                        <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="modal"
+                            data-bs-toggle="modal" data-bs-target="#analyticsModal">
+                            <i class="fas fa-chart-line text-warning me-2"></i>View Reports
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add CSS for hover effects and transitions -->
+    <style>
+        .hover-shadow {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hover-shadow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        .bg-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        }
+
+        .bg-success {
+            background: linear-gradient(135deg, #1cc88a 0%, #13855e 100%) !important;
+        }
+
+        .bg-info {
+            background: linear-gradient(135deg, #36b9cc 0%, #258391 100%) !important;
+        }
+
+        .bg-warning {
+            background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%) !important;
+        }
+    </style>
 @endsection
+
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Growth Chart
+        const ctx1 = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Schools',
+                    data: [65, 78, 90, 105, 120, 145, 168, 185, 200, 220, 235, 245],
+                    borderColor: '#4e73df',
+                    backgroundColor: 'rgba(78, 115, 223, 0.05)',
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Users',
+                    data: [8000, 9200, 10500, 11800, 12500, 13500, 14200, 14800, 15200, 15230, 15230,
+                        15230],
+                    borderColor: '#1cc88a',
+                    backgroundColor: 'rgba(28, 200, 138, 0.05)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // School Distribution Chart
+        const ctx2 = document.getElementById('schoolDistributionChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: ['Active Schools', 'Pending Schools', 'Suspended Schools'],
+                datasets: [{
+                    data: [210, 25, 10],
+                    backgroundColor: ['#4e73df', '#f6c23e', '#e74a3b'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    </script>
+@endpush

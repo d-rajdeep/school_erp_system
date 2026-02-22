@@ -10,7 +10,7 @@
     <br></br>
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{route('super_admin.dashboard')}}">
                 <i class="mdi mdi-view-dashboard menu-icon"></i>
                 <span class="menu-title">Dashboard</span>
             </a>
@@ -25,8 +25,8 @@
             </a>
             <div class="collapse" id="schools-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">View Schools</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Add School</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('super_admin.schools.index')}}">View Schools</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('super_admin.schools.create')}}">Add School</a></li>
                 </ul>
             </div>
         </li>
@@ -96,7 +96,7 @@
                 <div class="mt-4">
                     <ul class="mt-4 ps-0 list-unstyled">
                         <li>
-                            <a href="#"
+                            <a href="/logout"
                                 class="btn btn-block btn-danger text-white w-100 d-flex align-items-center justify-content-center">
                                 <i class="mdi mdi-logout me-2"></i> Sign Out
                             </a>

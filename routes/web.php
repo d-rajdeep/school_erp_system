@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SchoolAdmin\DashboardController as SchoolAdminDashboard;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentController;
 
 
@@ -76,4 +78,25 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
 
         Route::get('/students/{id}/delete', [StudentController::class, 'destroy'])
             ->name('students.delete');
+
+        Route::get('/classes', [ClassesController::class, 'index'])
+            ->name('classes.index');
+
+        Route::get('/classes/create', [ClassesController::class, 'create'])
+            ->name('classes.create');
+
+        Route::post('/classes/store', [ClassesController::class, 'store'])
+            ->name('classes.store');
+
+        Route::get('/classes/{id}/edit', [ClassesController::class, 'edit']);
+
+
+        Route::get('/sections', [SectionController::class, 'index'])
+            ->name('sections.index');
+
+        Route::get('/sections/create', [SectionController::class, 'create'])
+            ->name('sections.create');
+
+        Route::post('/sections/store', [SectionController::class, 'store'])
+            ->name('sections.store');
     });

@@ -2,7 +2,7 @@
 @section('content')
     <h2>Add Student</h2>
 
-    <form method="POST" action="{{route('school_admin.students.create')}}">
+    <form method="POST" action="{{route('school_admin.students.store')}}">
 
         @csrf
 

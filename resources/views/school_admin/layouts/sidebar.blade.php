@@ -40,7 +40,8 @@
                         </div> --}}
                     {{-- </li> --}}
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.students.index')}}">Student List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Add Student</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.classes.index')}}">Class List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.sections.index')}}">Section List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Promote Student</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Transfer Student</a></li>
                 </ul>

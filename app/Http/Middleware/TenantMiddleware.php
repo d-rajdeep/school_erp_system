@@ -14,13 +14,22 @@ class TenantMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            $tenantId = Auth::user()->tenant_id;
-
-            app()->instance('tenant_id', $tenantId);
+        if (!Auth::check()) {
+            return redirect()->route('login.form');
         }
+
+        $user = Auth::user();
+
+        if (!$user) {
+            abort(403, 'User not authenticated');
+        }
+
+        if (!$user->tenant_id) {
+            abort(403, 'Tenant not assigned');
+        }
+
         return $next($request);
     }
 }

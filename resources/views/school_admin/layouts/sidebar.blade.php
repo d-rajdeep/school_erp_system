@@ -39,7 +39,9 @@
                             </ul>
                         </div> --}}
                     {{-- </li> --}}
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.students.index')}}">Student List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.year.index')}}">Academic Year</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.student.register.index')}}">Student Register</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.students.index')}}">Student Admission</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.classes.index')}}">Class List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.sections.index')}}">Section List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Promote Student</a></li>

@@ -14,4 +14,9 @@ class AcademicYear extends Model
         'current_year',
         'tenant_id',
     ];
+
+    public function academicYear()
+    {
+        return $this->belongsTo(AcademicYear::class, 'year_id');
+    }
 }

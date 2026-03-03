@@ -42,8 +42,6 @@
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.year.index')}}">Academic Year</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.student.register.index')}}">Student Register</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.students.index')}}">Student Admission</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.classes.index')}}">Class List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.sections.index')}}">Section List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Promote Student</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Transfer Student</a></li>
                 </ul>
@@ -76,10 +74,10 @@
             </a>
             <div class="collapse" id="class-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Class List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Add Class</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Section List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Add Section</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.classes.index')}}">Class List</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Class</a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.sections.index')}}">Section List</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Section</a></li> --}}
                 </ul>
             </div>
         </li>

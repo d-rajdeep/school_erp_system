@@ -59,7 +59,6 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
     ->name('school_admin.')
     ->group(function () {
 
-
         Route::get('/academic_year', [AcademicYearController::class, 'index'])->name('year.index');
         Route::get('/academic_year/create', [AcademicYearController::class, 'create'])->name('year.create');
         Route::post('/academic_year/store', [AcademicYearController::class, 'store'])->name('year.store');
@@ -77,47 +76,28 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::delete('/students/register/{id}',    [StudentRegisterController::class, 'destroy'])->name('student.register.delete');
 
 
-        Route::get('/dashboard', [SchoolAdminDashboard::class, 'index'])
-            ->name('dashboard');
-
-        Route::get('/students', [StudentAdmissionController::class, 'index'])
-            ->name('students.index');
-
-        Route::get('/students/create', [StudentAdmissionController::class, 'create'])
-            ->name('students.create');
-
-        Route::post('/students/store', [StudentAdmissionController::class, 'store'])
-            ->name('students.store');
-
+        Route::get('/dashboard', [SchoolAdminDashboard::class, 'index'])->name('dashboard');
+        Route::get('/students', [StudentAdmissionController::class, 'index'])->name('students.index');
+        Route::get('/students/create', [StudentAdmissionController::class, 'create'])->name('students.create');
+        Route::post('/students/store', [StudentAdmissionController::class, 'store'])->name('students.store');
         Route::get('/students/search', [StudentAdmissionController::class, 'searchStudent'])->name('search');
+        Route::get('/students/{id}/edit',       [StudentAdmissionController::class, 'edit'])->name('students.edit');
+        Route::get('/students/{id}/show', [StudentAdmissionController::class, 'show'])->name('students.show');
+        Route::put('/students/{id}/update',     [StudentAdmissionController::class, 'update'])->name('students.update');
+        Route::delete('/students/{id}/delete',  [StudentAdmissionController::class, 'destroy'])->name('students.delete');
 
-        Route::get('/students/{id}/edit', [StudentAdmissionController::class, 'edit'])
-            ->name('students.edit');
-
-        Route::post('/students/{id}/update', [StudentAdmissionController::class, 'update'])
-            ->name('students.update');
-
-        Route::get('/students/{id}/delete', [StudentAdmissionController::class, 'destroy'])
-            ->name('students.delete');
-
-        Route::get('/classes', [ClassesController::class, 'index'])
-            ->name('classes.index');
-
-        Route::get('/classes/create', [ClassesController::class, 'create'])
-            ->name('classes.create');
-
-        Route::post('/classes/store', [ClassesController::class, 'store'])
-            ->name('classes.store');
-
-        Route::get('/classes/{id}/edit', [ClassesController::class, 'edit']);
+        Route::get('/classes',                [ClassesController::class, 'index'])->name('classes.index');
+        Route::get('/classes/create',         [ClassesController::class, 'create'])->name('classes.create');
+        Route::post('/classes/store',         [ClassesController::class, 'store'])->name('classes.store');
+        Route::get('/classes/{id}/edit',      [ClassesController::class, 'edit'])->name('classes.edit');
+        Route::put('/classes/{id}/update',    [ClassesController::class, 'update'])->name('classes.update');
+        Route::delete('/classes/{id}/delete', [ClassesController::class, 'destroy'])->name('classes.destroy');
 
 
-        Route::get('/sections', [SectionController::class, 'index'])
-            ->name('sections.index');
-
-        Route::get('/sections/create', [SectionController::class, 'create'])
-            ->name('sections.create');
-
-        Route::post('/sections/store', [SectionController::class, 'store'])
-            ->name('sections.store');
+        Route::get('/sections',              [SectionController::class, 'index'])->name('sections.index');
+        Route::get('/sections/create',       [SectionController::class, 'create'])->name('sections.create');
+        Route::post('/sections/store',       [SectionController::class, 'store'])->name('sections.store');
+        Route::get('/sections/{id}/edit',    [SectionController::class, 'edit'])->name('sections.edit');
+        Route::put('/sections/{id}/update',  [SectionController::class, 'update'])->name('sections.update');
+        Route::delete('/sections/{id}',      [SectionController::class, 'destroy'])->name('sections.destroy');
     });

@@ -68,9 +68,13 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::post('/academic_year/delete', [AcademicYearController::class, 'delete'])->name('year.delete');
 
 
-        Route::get('/students/register', [StudentRegisterController::class, 'index'])->name('student.register.index');
-        Route::get('/student/register', [StudentRegisterController::class, 'create'])->name('student.register.create');
-        Route::post('/student/register/store', [StudentRegisterController::class, 'store'])->name('student.register.store');
+        Route::get('/students/register',            [StudentRegisterController::class, 'index'])->name('student.register.index');
+        Route::get('/student/register',             [StudentRegisterController::class, 'create'])->name('student.register.create');
+        Route::post('/student/register/store',      [StudentRegisterController::class, 'store'])->name('student.register.store');
+        Route::get('/students/register/{id}/view',  [StudentRegisterController::class, 'show'])->name('student.register.view');
+        Route::get('/students/register/{id}/edit',  [StudentRegisterController::class, 'edit'])->name('student.register.edit');
+        Route::put('/students/register/{id}/update', [StudentRegisterController::class, 'update'])->name('student.register.update');
+        Route::delete('/students/register/{id}',    [StudentRegisterController::class, 'destroy'])->name('student.register.delete');
 
 
         Route::get('/dashboard', [SchoolAdminDashboard::class, 'index'])

@@ -5,7 +5,7 @@
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold">Student Registrations</h2>
-            <a href="{{route('school_admin.student.register.create')}}" class="btn btn-primary">
+            <a href="{{ route('school_admin.student.register.create') }}" class="btn btn-primary">
                 <i class="fas fa-plus me-2"></i>Add New Student
             </a>
         </div>
@@ -18,15 +18,15 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Sl. No</th>
                                     <th>Student ID</th>
                                     <th>Name</th>
-                                    <th>Email</th>
+                                    {{-- <th>Email</th> --}}
                                     <th>Mobile</th>
                                     <th>Gender</th>
-                                    <th>Father</th>
-                                    <th>Mother</th>
-                                    <th>DOB</th>
+                                    {{-- <th>Father</th> --}}
+                                    {{-- <th>Mother</th> --}}
+                                    {{-- <th>DOB</th> --}}
                                     <th>Register Date</th>
                                     <th>Year</th>
                                     <th>Transport</th>
@@ -40,7 +40,7 @@
                                         <td>{{ $student->id }}</td>
                                         <td>{{ $student->student_id ?? 'N/A' }}</td>
                                         <td>{{ $student->name ?? 'N/A' }}</td>
-                                        <td>{{ $student->email ?? 'N/A' }}</td>
+                                        {{-- <td>{{ $student->email ?? 'N/A' }}</td> --}}
                                         <td>{{ $student->mobile ?? 'N/A' }}</td>
                                         <td>
                                             @if ($student->gender == '1')
@@ -53,9 +53,9 @@
                                                 N/A
                                             @endif
                                         </td>
-                                        <td>{{ $student->fname ?? 'N/A' }}</td>
-                                        <td>{{ $student->mname ?? 'N/A' }}</td>
-                                        <td>{{ $student->dob ?? 'N/A' }}</td>
+                                        {{-- <td>{{ $student->fname ?? 'N/A' }}</td>
+                                        <td>{{ $student->mname ?? 'N/A' }}</td> --}}
+                                        {{-- <td>{{ $student->dob ?? 'N/A' }}</td> --}}
                                         <td>{{ $student->register_date ?? 'N/A' }}</td>
                                         <td>{{ $student->year ?? 'N/A' }}</td>
                                         <td>{{ $student->transport ? 'Yes' : 'No' }}</td>
@@ -67,16 +67,31 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- <a href="{{ route('school_admin.student_registers.edit', $student->id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
-                                            <form
-                                                action="{{ route('school_admin.student_registers.destroy', $student->id) }}"
-                                                method="POST" class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Delete this student?')">Delete</button>
-                                            </form> --}}
+                                            <div class="d-flex gap-3 align-items-center">
+                                                {{-- View --}}
+                                                <a href="{{ route('school_admin.student.register.view', $student->id) }}"
+                                                    class="text-primary" title="View">
+                                                    <i class="fas fa-eye fa-lg"></i>
+                                                </a>
+
+                                                {{-- Edit --}}
+                                                <a href="{{ route('school_admin.student.register.edit', $student->id) }}"
+                                                    class="text-warning" title="Edit">
+                                                    <i class="fas fa-pen fa-lg"></i>
+                                                </a>
+
+                                                {{-- Delete --}}
+                                                <form
+                                                    action="{{ route('school_admin.student.register.delete', $student->id) }}"
+                                                    method="POST" class="d-inline m-0">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="border-0 bg-transparent text-danger p-0"
+                                                        onclick="return confirm('Delete this student?')" title="Delete">
+                                                        <i class="fas fa-trash fa-lg"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

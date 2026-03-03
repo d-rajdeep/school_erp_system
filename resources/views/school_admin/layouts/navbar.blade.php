@@ -97,18 +97,17 @@
         <ul class="navbar-nav navbar-nav-right ml-lg-auto">
             <li class="nav-item dropdown d-none d-xl-flex border-0">
                 <a class="nav-link dropdown-toggle" id="languageDropdown" href="#" data-bs-toggle="dropdown">
-                    <i class="mdi mdi-earth"></i> English </a>
+                    <i class="mdi mdi-earth"></i> Language </a>
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
-                    <a class="dropdown-item" href="#"> French </a>
-                    <a class="dropdown-item" href="#"> Spain </a>
-                    <a class="dropdown-item" href="#"> Latin </a>
-                    <a class="dropdown-item" href="#"> Japanese </a>
+                    <a class="dropdown-item" href="#"> English </a>
+                    <a class="dropdown-item" href="#"> Assamese </a>
+
                 </div>
             </li>
             <li class="nav-item  nav-profile dropdown border-0">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                    <img class="nav-profile-img me-2" alt="" src="../../../assets/images/faces/face1.jpg">
-                    <span class="profile-name">Henry Klein</span>
+                    <img class="nav-profile-img me-2" alt="" src="{{asset('assets/images/faces/images.png')}}">
+                    <span class="profile-name">School Admin</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
                     <a class="dropdown-item" href="#">

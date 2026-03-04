@@ -10,6 +10,7 @@ use App\Http\Controllers\SchoolAdmin\DashboardController as SchoolAdminDashboard
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\StudentAdmissionController;
 use App\Http\Controllers\StudentRegisterController;
+use App\Http\Controllers\TeacherController;
 use App\Models\AcademicYear;
 
 Route::get('/', function () {
@@ -100,4 +101,12 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::get('/sections/{id}/edit',    [SectionController::class, 'edit'])->name('sections.edit');
         Route::put('/sections/{id}/update',  [SectionController::class, 'update'])->name('sections.update');
         Route::delete('/sections/{id}',      [SectionController::class, 'destroy'])->name('sections.destroy');
+
+        Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
+        Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
+        Route::post('/teachers/store', [TeacherController::class, 'store'])->name('teachers.store');
+        Route::get('/teachers/edit/{id}', [TeacherController::class, 'edit'])->name('teachers.edit');
+        Route::get('/teachers/{id}/show',      [TeacherController::class, 'show'])->name('teachers.show');
+        Route::put('/teachers/update/{id}', [TeacherController::class, 'update'])->name('teachers.update');
+        Route::delete('/teachers/delete/{id}', [TeacherController::class, 'destroy'])->name('teachers.delete');
     });

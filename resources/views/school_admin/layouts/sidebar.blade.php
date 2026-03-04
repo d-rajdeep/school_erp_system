@@ -33,34 +33,20 @@
                         <div class="collapse" id="student-list-sub">
                             <ul class="nav flex-column sub-menu ps-3">
                                 {{-- <li class="nav-item"> <a class="nav-link" href="#">View Student</a></li> --}}
-                                {{-- <li class="nav-item"> <a class="nav-link" href="#">Edit Student</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Edit Student</a></li>
                                 <li class="nav-item"> <a class="nav-link text-danger" href="#">Delete Student</a>
                                 </li>
                             </ul>
                         </div> --}}
                     {{-- </li> --}}
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.year.index')}}">Academic Year</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.student.register.index')}}">Student Register</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.students.index')}}">Student Admission</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.year.index') }}">Academic
+                            Year</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.student.register.index') }}">Student Register</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.students.index') }}">Student
+                            Admission</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Promote Student</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Transfer Student</a></li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#teacher-mgmt" aria-expanded="false"
-                aria-controls="teacher-mgmt">
-                <i class="mdi mdi-teach menu-icon"></i>
-                <span class="menu-title">Teacher Management</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="teacher-mgmt">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Teacher List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Add Teacher</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Edit Teacher</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Assign Class</a></li>
                 </ul>
             </div>
         </li>
@@ -74,13 +60,34 @@
             </a>
             <div class="collapse" id="class-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.classes.index')}}">Class List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.classes.index') }}">Class
+                            List</a></li>
                     {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Class</a></li> --}}
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.sections.index')}}">Section List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.sections.index') }}">Section
+                            List</a></li>
                     {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Section</a></li> --}}
                 </ul>
             </div>
         </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#teacher-mgmt" aria-expanded="false"
+                aria-controls="teacher-mgmt">
+                <i class="mdi mdi-teach menu-icon"></i>
+                <span class="menu-title">Teacher Management</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="teacher-mgmt">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.index')}}">Teacher List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.create')}}">Add Teacher</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.edit')}}">Edit Teacher</a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="#">Assign Class</a></li>
+                </ul>
+            </div>
+        </li>
+
+
 
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#timetable-mgmt" aria-expanded="false"

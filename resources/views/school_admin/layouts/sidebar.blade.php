@@ -65,7 +65,8 @@
                     {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Class</a></li> --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.sections.index') }}">Section
                             List</a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Section</a></li> --}}
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.subjects.index') }}">Subject
+                            List</a></li>
                 </ul>
             </div>
         </li>
@@ -79,10 +80,10 @@
             </a>
             <div class="collapse" id="teacher-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.index')}}">Teacher List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.create')}}">Add Teacher</a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.teachers.edit')}}">Edit Teacher</a></li> --}}
-                    <li class="nav-item"> <a class="nav-link" href="#">Assign Class</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.teachers.index') }}">Teacher
+                            List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.teachers.create') }}">Add
+                            Teacher</a></li>
                 </ul>
             </div>
         </li>
@@ -98,9 +99,11 @@
             </a>
             <div class="collapse" id="timetable-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">View Timetable</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Create Timetable</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Edit Timetable</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.timetable.index') }}">View
+                            Timetable</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.timetable.create') }}">Assign
+                            Teacher</a></li>
+                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.timetable.edit')}}">Edit Timetable</a></li> --}}
                 </ul>
             </div>
         </li>
@@ -114,8 +117,14 @@
             </a>
             <div class="collapse" id="attendance-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Student Attendance</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Staff Attendance</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.attendance.student') }}">Student Attendance</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.attendance.student.report') }}">View Student Report</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.attendance.staff') }}">Staff Attendance</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.attendance.staff.report') }}">View Staff Report</a></li>
                 </ul>
             </div>
         </li>

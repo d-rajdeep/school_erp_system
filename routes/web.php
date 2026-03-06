@@ -8,9 +8,13 @@ use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SchoolAdmin\DashboardController as SchoolAdminDashboard;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\StaffAttendanceController;
 use App\Http\Controllers\StudentAdmissionController;
+use App\Http\Controllers\StudentAttendanceController;
 use App\Http\Controllers\StudentRegisterController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\TimetableController;
 use App\Models\AcademicYear;
 
 Route::get('/', function () {
@@ -102,6 +106,13 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::put('/sections/{id}/update',  [SectionController::class, 'update'])->name('sections.update');
         Route::delete('/sections/{id}',      [SectionController::class, 'destroy'])->name('sections.destroy');
 
+        Route::get('/subjects', [SubjectController::class, 'index'])->name('subjects.index');
+        Route::get('/subjects/create', [SubjectController::class, 'create'])->name('subjects.create');
+        Route::post('/subjects/store', [SubjectController::class, 'store'])->name('subjects.store');
+        Route::get('/subjects/edit/{id}', [SubjectController::class, 'edit'])->name('subjects.edit');
+        Route::put('/subjects/update/{id}', [SubjectController::class, 'update'])->name('subjects.update');
+        Route::delete('/subjects/delete/{id}', [SubjectController::class, 'destroy'])->name('subjects.delete');
+
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teachers.index');
         Route::get('/teachers/create', [TeacherController::class, 'create'])->name('teachers.create');
         Route::post('/teachers/store', [TeacherController::class, 'store'])->name('teachers.store');
@@ -109,4 +120,19 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::get('/teachers/{id}/show',      [TeacherController::class, 'show'])->name('teachers.show');
         Route::put('/teachers/update/{id}', [TeacherController::class, 'update'])->name('teachers.update');
         Route::delete('/teachers/delete/{id}', [TeacherController::class, 'destroy'])->name('teachers.delete');
+
+        Route::get('/timetable', [TimetableController::class, 'index'])->name('timetable.index');
+        Route::get('/timetable/create', [TimetableController::class, 'create'])->name('timetable.create');
+        Route::post('/timetable/store', [TimetableController::class, 'store'])->name('timetable.store');
+        Route::get('/timetable/edit/{id}', [TimetableController::class, 'edit'])->name('timetable.edit');
+        Route::put('/timetable/update/{id}', [TimetableController::class, 'update'])->name('timetable.update');
+        Route::delete('/timetable/delete/{id}', [TimetableController::class, 'destroy'])->name('timetable.delete');
+
+        Route::get('/attendance/student', [StudentAttendanceController::class, 'index'])->name('attendance.student');
+        Route::post('/attendance/student/store', [StudentAttendanceController::class, 'store'])->name('attendance.student.store');
+        Route::get('/attendance/student/report', [StudentAttendanceController::class, 'report'])->name('attendance.student.report');
+
+        Route::get('/attendance/staff', [StaffAttendanceController::class, 'index'])->name('attendance.staff');
+        Route::post('/attendance/staff/store', [StaffAttendanceController::class, 'store'])->name('attendance.staff.store');
+        Route::get('/attendance/staff/report', [StaffAttendanceController::class, 'report'])->name('attendance.staff.report');
     });

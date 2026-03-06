@@ -34,4 +34,9 @@ class StudentRegister extends Model
     {
         return $this->belongsTo(School::class, 'tenant_id');
     }
+
+    public function attendances()
+    {
+        return $this->hasMany(StudentAttendance::class, 'student_id');
+    }
 }

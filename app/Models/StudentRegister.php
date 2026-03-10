@@ -39,4 +39,9 @@ class StudentRegister extends Model
     {
         return $this->hasMany(StudentAttendance::class, 'student_id');
     }
+
+    public function examMarks()
+    {
+        return $this->hasMany(ExamMark::class, 'student_id');
+    }
 }

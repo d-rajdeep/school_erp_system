@@ -138,9 +138,9 @@
             </a>
             <div class="collapse" id="exam-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Exam List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Create Exam</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Marks Entry</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.index')}}">Exam List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.create')}}">Create Exam</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.marks_entry')}}">Marks Entry</a></li>
                     <li class="nav-item"> <a class="nav-link" href="#">Report Cards</a></li>
                 </ul>
             </div>

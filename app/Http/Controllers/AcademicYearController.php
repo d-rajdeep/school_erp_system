@@ -41,10 +41,16 @@ class AcademicYearController extends Controller
 
         $data['tenant_id'] = $tenant_id;
 
+        // Automatically set status based on current_year selection
+        $data['status'] = $data['current_year'] == 1 ? 1 : 2;
+
         if ($data['current_year'] == 1) {
+            // ONLY deactivate other years and change their status for THIS specific school!
             AcademicYear::where('tenant_id', $tenant_id)
-                ->where('current_year', 1)
-                ->update(['current_year' => 0]);
+                ->update([
+                    'current_year' => 0,
+                    'status' => 2 // Set others to Inactive
+                ]);
         }
 
         AcademicYear::create($data);
@@ -73,13 +79,18 @@ class AcademicYearController extends Controller
             $year = AcademicYear::where('tenant_id', $tenant_id)
                 ->findOrFail($request->id);
 
+            // Set this year to Current AND Active
             $year->current_year = 1;
+            $year->status = 1;
             $year->save();
 
-            // ONLY deactivate other years for THIS specific school!
+            // Deactivate other years AND change their status to Inactive
             AcademicYear::where('tenant_id', $tenant_id)
                 ->where('id', '!=', $request->id)
-                ->update(['current_year' => 0]);
+                ->update([
+                    'current_year' => 0,
+                    'status' => 2
+                ]);
 
             return response()->json(['success' => true, 'message' => 'Year Activated Successfully']);
         } catch (\Exception $e) {

@@ -4,6 +4,8 @@ use App\Http\Controllers\AcademicYearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\ExamController;
+use App\Http\Controllers\ExamMarkController;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SchoolAdmin\DashboardController as SchoolAdminDashboard;
@@ -135,4 +137,21 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::get('/attendance/staff', [StaffAttendanceController::class, 'index'])->name('attendance.staff');
         Route::post('/attendance/staff/store', [StaffAttendanceController::class, 'store'])->name('attendance.staff.store');
         Route::get('/attendance/staff/report', [StaffAttendanceController::class, 'report'])->name('attendance.staff.report');
+
+        Route::get('/exams', [ExamController::class, 'index'])->name('exams.index');
+        Route::get('/exams/create', [ExamController::class, 'create'])->name('exams.create');
+        Route::post('/exams/store', [ExamController::class, 'store'])->name('exams.store');
+        Route::get('/exams/edit/{id}', [ExamController::class, 'edit'])->name('exams.edit');
+        Route::put('/exams/update/{id}', [ExamController::class, 'update'])->name('exams.update');
+        Route::delete('/exams/delete/{id}', [ExamController::class, 'destroy'])->name('exams.delete');
+
+        Route::get('/exams/marks-entry', [ExamMarkController::class, 'entry'])->name('exams.marks_entry');
+        Route::post('/exams/marks-entry/store', [ExamMarkController::class, 'store'])->name('exams.marks_store');
+
+        Route::get('/exams/marksheet/{exam}/{student}', [ExamMarkController::class, 'marksheet'])->name('exams.marksheet');
+
+        Route::get('/exams/marks', [ExamMarkController::class, 'index'])->name('exams.marks_index');
+        Route::get('/exams/marks/edit/{id}', [ExamMarkController::class, 'edit'])->name('exams.marks_edit');
+        Route::put('/exams/marks/update/{id}', [ExamMarkController::class, 'update'])->name('exams.marks_update');
+        Route::delete('/exams/marks/delete/{id}', [ExamMarkController::class, 'destroy'])->name('exams.marks_delete');
     });

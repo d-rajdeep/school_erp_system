@@ -1,6 +1,5 @@
 @extends('school_admin.layouts.app')
 @section('content')
-
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
@@ -104,8 +103,8 @@
                         .then(response => response.json())
                         .then(data => {
                             if (data.success) {
-                                // Optional: Show a subtle toast or alert here
-                                console.log(data.message);
+                                // Instantly reload the page to refresh the status badges
+                                window.location.reload();
                             } else {
                                 alert('Error: ' + data.message);
                             }

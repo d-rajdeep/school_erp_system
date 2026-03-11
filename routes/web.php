@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\ExamMarkController;
+use App\Http\Controllers\FeePaymentController;
+use App\Http\Controllers\FeeStructureController;
+use App\Http\Controllers\FeeTypeController;
 use App\Http\Controllers\SuperAdmin\DashboardController as SuperAdminDashboard;
 use App\Http\Controllers\SuperAdmin\SchoolController;
 use App\Http\Controllers\SchoolAdmin\DashboardController as SchoolAdminDashboard;
@@ -154,4 +157,21 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
         Route::get('/exams/marks/edit/{id}', [ExamMarkController::class, 'edit'])->name('exams.marks_edit');
         Route::put('/exams/marks/update/{id}', [ExamMarkController::class, 'update'])->name('exams.marks_update');
         Route::delete('/exams/marks/delete/{id}', [ExamMarkController::class, 'destroy'])->name('exams.marks_delete');
+
+        Route::get('/fees/types', [FeeTypeController::class, 'index'])->name('fees.types_index');
+        Route::post('/fees/types/store', [FeeTypeController::class, 'store'])->name('fees.types_store');
+        Route::get('/fees/types/{id}/edit', [FeeTypeController::class, 'edit'])->name('fees.types_edit');
+        Route::put('/fees/types/update/{id}', [FeeTypeController::class, 'update'])->name('fees.types_update');
+        Route::delete('/fees/types/delete/{id}', [FeeTypeController::class, 'destroy'])->name('fees.types_delete');
+
+        Route::get('/fees/structure', [FeeStructureController::class, 'index'])->name('fees.structure_index');
+        Route::post('/fees/structure/store', [FeeStructureController::class, 'store'])->name('fees.structure_store');
+        Route::get('/fees/structure/{id}/edit', [FeeStructureController::class, 'edit'])->name('fees.structure_edit');
+        Route::put('/fees/structure/update/{id}', [FeeStructureController::class, 'update'])->name('fees.structure_update');
+        Route::delete('/fees/structure/delete/{id}', [FeeStructureController::class, 'destroy'])->name('fees.structure_delete');
+
+        Route::get('/fees/payments', [FeePaymentController::class, 'index'])->name('fees.payments_index');
+        Route::get('/fees/payments/collect/{student_id}/{class_id}', [FeePaymentController::class, 'collect'])->name('fees.payments_collect');
+        Route::post('/fees/payments/store', [FeePaymentController::class, 'store'])->name('fees.payments_store');
+        Route::get('/fees/payments/receipt/{id}', [FeePaymentController::class, 'receipt'])->name('fees.payments_receipt');
     });

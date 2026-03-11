@@ -44,4 +44,9 @@ class StudentRegister extends Model
     {
         return $this->hasMany(ExamMark::class, 'student_id');
     }
+
+    public function admission()
+    {
+        return $this->hasOne(StudentAdmission::class, 'student_id');
+    }
 }

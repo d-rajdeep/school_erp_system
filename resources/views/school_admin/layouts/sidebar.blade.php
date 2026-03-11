@@ -138,10 +138,14 @@
             </a>
             <div class="collapse" id="exam-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.index')}}">Exam List</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.create')}}">Create Exam</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.exams.marks_entry')}}">Marks Entry</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Report Cards</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.exams.index') }}">Exam
+                            List</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.exams.create') }}">Create
+                            Exam</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.exams.marks_entry') }}">Marks Entry</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.exams.marks_index') }}">Report Cards</a></li>
                 </ul>
             </div>
         </li>
@@ -154,10 +158,28 @@
             </a>
             <div class="collapse" id="fee-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="#">Fee Structure</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Collect Fee</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Payment History</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="#">Reports</a></li>
+
+                    {{-- 1. Master Setup: Create the fee names (Tuition, Library, etc.) --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('school_admin.fees.types_index') }}">Fee Types</a>
+                    </li>
+
+                    {{-- 2. Allocation: Assign those fees and amounts to specific classes --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('school_admin.fees.structure_index') }}">Fee Structure</a>
+                    </li>
+
+                    {{-- 3. Transactions: View past payments AND search students to collect new fees --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('school_admin.fees.payments_index') }}">Payments &
+                            Collection</a>
+                    </li>
+
+                    {{-- 4. Reports: (We will build this module later) --}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Fee Reports</a>
+                    </li>
+
                 </ul>
             </div>
         </li>

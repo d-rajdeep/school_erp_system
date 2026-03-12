@@ -9,6 +9,7 @@ use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Http\Controllers\ActivityLogController;
 
 class FeePaymentController extends Controller
 {
@@ -18,25 +19,35 @@ class FeePaymentController extends Controller
     }
 
     // 1. Show the search page & recent payments
+    // 1. Show the search page & student's payment history
     public function index(Request $request)
     {
         $tenant_id = $this->getTenantId();
 
         $searchResults = null;
+        $recentPayments = null;
 
+        // Only run database queries if a search term is entered
         if ($request->filled('search')) {
+            $searchTerm = $request->search;
+
+            // 1. Find the student(s)
             $searchResults = StudentRegister::with('admission')
                 ->where('tenant_id', $tenant_id)
-                ->where(function ($q) use ($request) {
-                    $q->where('name', 'like', '%' . $request->search . '%')
-                        ->orWhere('student_id', 'like', '%' . $request->search . '%');
+                ->where(function ($q) use ($searchTerm) {
+                    $q->where('name', 'like', '%' . $searchTerm . '%')
+                        ->orWhere('student_id', 'like', '%' . $searchTerm . '%');
                 })->get();
-        }
 
-        $recentPayments = FeePayment::with(['student', 'feeType', 'schoolClass'])
-            ->where('tenant_id', $tenant_id)
-            ->latest()
-            ->paginate(20);
+            // 2. Fetch payment receipts ONLY for the searched student(s)
+            $studentIds = $searchResults->pluck('id');
+
+            $recentPayments = FeePayment::with(['student', 'feeType', 'schoolClass'])
+                ->where('tenant_id', $tenant_id)
+                ->whereIn('student_id', $studentIds)
+                ->latest()
+                ->paginate(20);
+        }
 
         return view('school_admin.fees.payments_index', compact('recentPayments', 'searchResults'));
     }
@@ -99,6 +110,12 @@ class FeePaymentController extends Controller
 
         $payment = FeePayment::create($validated);
 
+        ActivityLogController::log(
+            'Fee Management', // The Module
+            'Collected',      // The Action
+            'Collected ₹' . $payment->paid_amount . ' from Student ID: ' . $request->student_id . ' (Receipt: ' . $payment->receipt_number . ')' // The Description
+        );
+
         // Redirect to the receipt printing page
         return redirect()->route('school_admin.fees.payments_receipt', $payment->id)
             ->with('success', 'Payment collected successfully!');
@@ -115,4 +132,5 @@ class FeePaymentController extends Controller
 
         return view('school_admin.fees.payments_receipt', compact('payment'));
     }
+
 }

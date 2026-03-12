@@ -69,6 +69,12 @@ class StudentRegisterController extends Controller
 
         StudentRegister::create($validated);
 
+        ActivityLogController::log(
+            'Student Register',
+            'Registered',
+            'Registered new student: ' . $validated['name'] . ' (ID: ' . $validated['student_id'] . ')'
+        );
+
         return redirect()->route('school_admin.student.register.index')
             ->with('success', 'Student registered successfully. Student ID: ' . $validated['student_id']);
     }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AcademicYearController;
+use App\Http\Controllers\ActivityLogController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassesController;
@@ -60,7 +61,7 @@ Route::middleware(['auth', 'role:super_admin'])
             ->name('schools.update');
 
         Route::delete('/schools/{id}/delete', [SchoolController::class, 'destroy'])
-        ->name('schools.delete');
+            ->name('schools.delete');
     });
 
 
@@ -68,6 +69,8 @@ Route::middleware(['auth', 'role:school_admin', 'tenant'])
     ->prefix('school-admin')
     ->name('school_admin.')
     ->group(function () {
+
+        Route::get('/activity-log', [ActivityLogController::class, 'index'])->name('activity_log.index');
 
         Route::get('/academic_year', [AcademicYearController::class, 'index'])->name('year.index');
         Route::get('/academic_year/create', [AcademicYearController::class, 'create'])->name('year.create');

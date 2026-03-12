@@ -1,7 +1,8 @@
-<nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+<nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row shadow-sm">
     <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
-        <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img
-                src="../../../assets/images/logo-mini.svg" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="#">
+            <img src="{{ asset('assets/images/logo-mini.svg') }}" alt="logo" />
+        </a>
         <button class="navbar-toggler navbar-toggler align-self-center me-2" type="button" data-toggle="minimize">
             <i class="mdi mdi-menu"></i>
         </button>
@@ -14,71 +15,69 @@
                 </a>
                 <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list"
                     aria-labelledby="notificationDropdown">
-                    <h6 class="p-3 mb-0 ">Notifications</h6>
+                    <h6 class="p-3 mb-0">Notifications</h6>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="../../../assets/images/faces/face4.jpg" alt="" class="profile-pic">
+                            <img src="{{ asset('assets/images/faces/face4.jpg') }}" alt="" class="profile-pic">
                         </div>
                         <div class="preview-item-content">
-                            <p class="mb-0">Dany Miles <span class="text-small text-muted">commented on
-                                    your photo</span></p>
+                            <p class="mb-0">Dany Miles <span class="text-small text-muted">commented on your
+                                    photo</span></p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="../../../assets/images/faces/face3.jpg" alt="" class="profile-pic">
+                            <img src="{{ asset('assets/images/faces/face3.jpg') }}" alt="" class="profile-pic">
                         </div>
                         <div class="preview-item-content">
-                            <p class="mb-0">James <span class="text-small text-muted">posted a photo on
-                                    your wall</span></p>
+                            <p class="mb-0">James <span class="text-small text-muted">posted a photo on your
+                                    wall</span></p>
                         </div>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-thumbnail">
-                            <img src="../../../assets/images/faces/face2.jpg" alt="" class="profile-pic">
+                            <img src="{{ asset('assets/images/faces/face2.jpg') }}" alt="" class="profile-pic">
                         </div>
                         <div class="preview-item-content">
-                            <p class="mb-0">Alex <span class="text-small text-muted">just mentioned you
-                                    in his post</span></p>
+                            <p class="mb-0">Alex <span class="text-small text-muted">just mentioned you in his
+                                    post</span></p>
                         </div>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <p class="p-3 mb-0 ">View all activities</p>
+                    <p class="p-3 mb-0 text-center text-primary cursor-pointer">View all activities</p>
                 </div>
             </li>
             <li class="nav-item dropdown d-none d-sm-flex">
                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
                     data-bs-toggle="dropdown">
                     <i class="mdi mdi-email-outline"></i>
-                    <span class="count  count-varient2">5</span>
+                    <span class="count count-varient2">5</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown navbar-dropdown-large preview-list"
                     aria-labelledby="messageDropdown">
-                    <h6 class="p-3 mb-0 ">Messages</h6>
+                    <h6 class="p-3 mb-0">Messages</h6>
                     <a class="dropdown-item preview-item">
                         <div class="preview-item-content flex-grow">
                             <span class="badge badge-pill badge-success">Request</span>
-                            <p class="text-small text-muted ellipsis mb-0"> Suport needed for user123 </p>
+                            <p class="text-small text-muted ellipsis mb-0"> Support needed for user123 </p>
                         </div>
                         <p class="text-small text-muted align-self-start">4:10 PM</p>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-item-content flex-grow">
                             <span class="badge badge-pill badge-warning">Invoices</span>
-                            <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed
-                            </p>
+                            <p class="text-small text-muted ellipsis mb-0"> Invoice for order is mailed </p>
                         </div>
                         <p class="text-small text-muted align-self-start">4:10 PM</p>
                     </a>
                     <a class="dropdown-item preview-item">
                         <div class="preview-item-content flex-grow">
                             <span class="badge badge-pill badge-danger">Projects</span>
-                            <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow
-                            </p>
+                            <p class="text-small text-muted ellipsis mb-0"> New project will start tomorrow </p>
                         </div>
                         <p class="text-small text-muted align-self-start">4:10 PM</p>
                     </a>
-                    <h6 class="p-3 mb-0 ">See all activity</h6>
+                    <h6 class="p-3 mb-0 text-center text-primary cursor-pointer">See all activity</h6>
                 </div>
             </li>
             <li class="nav-item nav-search border-0 ms-1 ms-md-3 ms-lg-5 d-none d-md-flex">
@@ -101,19 +100,21 @@
                 <div class="dropdown-menu navbar-dropdown" aria-labelledby="languageDropdown">
                     <a class="dropdown-item" href="#"> English </a>
                     <a class="dropdown-item" href="#"> Assamese </a>
-
                 </div>
             </li>
-            <li class="nav-item  nav-profile dropdown border-0">
+            <li class="nav-item nav-profile dropdown border-0">
                 <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown">
-                    <img class="nav-profile-img me-2" alt="" src="{{asset('assets/images/faces/images.png')}}">
+                    <img class="nav-profile-img me-2" alt=""
+                        src="{{ asset('assets/images/faces/images.png') }}">
                     <span class="profile-name">School Admin</span>
                 </a>
                 <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
-                    <a class="dropdown-item" href="#">
-                        <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+                    <a class="dropdown-item" href="{{ route('school_admin.activity_log.index') }}">
+                        <i class="mdi mdi-cached me-2 text-success"></i> Activity Log
+                    </a>
+                    <a class="dropdown-item" href="/logout">
+                        <i class="mdi mdi-logout me-2 text-primary"></i> Signout
+                    </a>
                 </div>
             </li>
         </ul>

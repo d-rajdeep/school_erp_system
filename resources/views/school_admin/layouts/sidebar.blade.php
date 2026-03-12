@@ -1,5 +1,5 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
-    <div class="text-center sidebar-brand-wrapper d-flex align-items-center justify-content-center">
+<nav class="sidebar sidebar-offcanvas shadow" id="sidebar">
+    <div class="text-center sidebar-brand-wrapper d-flex align-items-center justify-content-center pb-4 pt-3">
         <a class="sidebar-brand brand-logo text-decoration-none" href="#">
             <h2 class="text-black font-weight-bold mb-0">School Admin</h2>
         </a>
@@ -7,7 +7,7 @@
             <h2 class="text-black font-weight-bold mb-0">SA</h2>
         </a>
     </div>
-    <br></br>
+<br>
     <ul class="nav">
         <li class="nav-item">
             <a class="nav-link" href="/school-admin/dashboard">
@@ -25,20 +25,6 @@
             </a>
             <div class="collapse" id="student-mgmt">
                 <ul class="nav flex-column sub-menu">
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="{{route('school_admin.students.index')}}" aria-expanded="false"
-                            aria-controls="student-list-sub">
-                            Student List <i class="mdi mdi-chevron-down ms-auto" style="font-size: 0.8rem;"></i>
-                        </a>
-                        <div class="collapse" id="student-list-sub">
-                            <ul class="nav flex-column sub-menu ps-3">
-                                {{-- <li class="nav-item"> <a class="nav-link" href="#">View Student</a></li> --}}
-                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Edit Student</a></li>
-                                <li class="nav-item"> <a class="nav-link text-danger" href="#">Delete Student</a>
-                                </li>
-                            </ul>
-                        </div> --}}
-                    {{-- </li> --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.year.index') }}">Academic
                             Year</a></li>
                     <li class="nav-item"> <a class="nav-link"
@@ -62,7 +48,6 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.classes.index') }}">Class
                             List</a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="#">Add Class</a></li> --}}
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.sections.index') }}">Section
                             List</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.subjects.index') }}">Subject
@@ -88,8 +73,6 @@
             </div>
         </li>
 
-
-
         <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#timetable-mgmt" aria-expanded="false"
                 aria-controls="timetable-mgmt">
@@ -103,7 +86,6 @@
                             Timetable</a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('school_admin.timetable.create') }}">Assign
                             Teacher</a></li>
-                    {{-- <li class="nav-item"> <a class="nav-link" href="{{route('school_admin.timetable.edit')}}">Edit Timetable</a></li> --}}
                 </ul>
             </div>
         </li>
@@ -158,28 +140,12 @@
             </a>
             <div class="collapse" id="fee-mgmt">
                 <ul class="nav flex-column sub-menu">
-
-                    {{-- 1. Master Setup: Create the fee names (Tuition, Library, etc.) --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('school_admin.fees.types_index') }}">Fee Types</a>
-                    </li>
-
-                    {{-- 2. Allocation: Assign those fees and amounts to specific classes --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('school_admin.fees.structure_index') }}">Fee Structure</a>
-                    </li>
-
-                    {{-- 3. Transactions: View past payments AND search students to collect new fees --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('school_admin.fees.payments_index') }}">Payments &
-                            Collection</a>
-                    </li>
-
-                    {{-- 4. Reports: (We will build this module later) --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Fee Reports</a>
-                    </li>
-
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.fees.types_index') }}">Fee Types</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.fees.structure_index') }}">Fee Structure</a></li>
+                    <li class="nav-item"> <a class="nav-link"
+                            href="{{ route('school_admin.fees.payments_index') }}">Payments & Collection</a></li>
                 </ul>
             </div>
         </li>
@@ -233,18 +199,13 @@
             </div>
         </li>
 
-        <li class="nav-item sidebar-actions">
+        <li class="nav-item sidebar-actions mt-3">
             <div class="nav-link pt-0">
-                <div class="mt-4">
-                    <ul class="mt-4 ps-0 list-unstyled">
-                        <li>
-                            <a href="/logout"
-                                class="btn btn-block btn-danger text-white w-100 d-flex align-items-center justify-content-center">
-                                <i class="mdi mdi-logout me-2"></i> Logout
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <a href="/logout"
+                    class="btn btn-danger text-white w-100 d-flex align-items-center justify-content-center shadow-sm"
+                    style="border-radius: 8px;">
+                    <i class="mdi mdi-logout me-2"></i> Logout
+                </a>
             </div>
         </li>
     </ul>

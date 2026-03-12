@@ -791,14 +791,14 @@
                         <i class="fas fa-play"></i>
                         Watch Demo
                     </a>
-                    <a href="/register" class="btn-outline">
+                    <a href="/login" class="btn-outline">
                         <i class="fas fa-rocket"></i>
                         Get Started
                     </a>
                 </div>
             </div>
             <div class="hero-image" data-aos="fade-left">
-                <img src="https://via.placeholder.com/600x400/4e73df/ffffff?text=School+ERP+Dashboard"
+                <img src="{{asset('assets/images/hero.png')}}"
                     alt="School ERP Dashboard">
             </div>
         </div>

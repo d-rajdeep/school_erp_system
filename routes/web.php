@@ -59,8 +59,8 @@ Route::middleware(['auth', 'role:super_admin'])
         Route::post('/schools/{id}/update', [SchoolController::class, 'update'])
             ->name('schools.update');
 
-        Route::get('/schools/{id}/delete', [SchoolController::class, 'destroy'])
-            ->name('schools.delete');
+        Route::delete('/schools/{id}/delete', [SchoolController::class, 'destroy'])
+        ->name('schools.delete');
     });
 
 
